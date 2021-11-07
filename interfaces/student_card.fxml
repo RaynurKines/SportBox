@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="376.0" layoutY="347.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ОК" />
+      <Button layoutX="466.0" layoutY="347.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Отмена" />
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Фамилия" />
+      <TextField layoutX="14.0" layoutY="39.0" />
+      <Text layoutX="14.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя" />
+      <TextField layoutX="15.0" layoutY="93.0" />
+      <Text layoutX="14.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Отчество" />
+      <TextField layoutX="15.0" layoutY="144.0" />
+      <Text layoutX="14.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата рождения" />
+      <Text layoutX="14.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Возраст" />
+      <TextField layoutX="15.0" layoutY="250.0" />
+      <Text layoutX="205.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пол" />
+      <TextField layoutX="206.0" layoutY="36.0" />
+      <Text layoutX="211.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Телефон" />
+      <TextField layoutX="206.0" layoutY="93.0" />
+      <Text layoutX="204.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Результаты" />
+      <DatePicker layoutX="11.0" layoutY="200.0" />
+      <TableView layoutX="204.0" layoutY="149.0" prefHeight="182.0" prefWidth="388.0">
+        <columns>
+          <TableColumn prefWidth="136.00006103515625" text="Название события" />
+          <TableColumn prefWidth="159.20001220703125" text="Название соревнования" />
+            <TableColumn prefWidth="93.60003662109375" text="Место" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
