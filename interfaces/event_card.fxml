@@ -4,20 +4,27 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="Добавить" />
-      <Button layoutX="100.0" layoutY="13.0" mnemonicParsing="false" text="Изменить" />
-      <Button layoutX="193.0" layoutY="13.0" mnemonicParsing="false" text="Удалить" />
-      <TableView layoutX="9.0" layoutY="56.0" prefHeight="322.0" prefWidth="582.0">
-         <columns>
-            <TableColumn prefWidth="77.5999755859375" text="Название" />
-            <TableColumn prefWidth="108.0" text="Дата проведения" />
-            <TableColumn prefWidth="102.39996337890625" text="Вид спорта" />
-            <TableColumn prefWidth="155.20001220703125" text="Уровень соревнований" />
-            <TableColumn prefWidth="153.5999755859375" text="Список состязаний" />
-         </columns>
+      <Text layoutX="13.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название" />
+      <Text layoutX="15.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата проведения" />
+      <Text layoutX="11.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Уровень соревнований" />
+      <Text layoutX="198.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Состязания" />
+      <TableView layoutX="182.0" layoutY="71.0" prefHeight="289.0" prefWidth="405.0">
+        <columns>
+          <TableColumn prefWidth="404.7999969482422" text="Название состязания" />
+        </columns>
       </TableView>
+      <Text fill="#949494d6" layoutX="13.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="10.0" layoutY="79.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="10.0" layoutY="136.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+      <Text fill="#949494d6" layoutX="15.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата проведения" />
+      <Text fill="#949494d6" layoutX="11.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Уровень соревнований" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="9.0" layoutY="195.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+      <Button layoutX="20.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Назад" />
+      <Button layoutX="114.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Изменить" />
    </children>
 </AnchorPane>

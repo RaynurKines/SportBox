@@ -7,9 +7,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="Добавить" />
-      <Button layoutX="100.0" layoutY="13.0" mnemonicParsing="false" text="Изменить" />
-      <Button layoutX="193.0" layoutY="13.0" mnemonicParsing="false" text="Удалить" />
       <TableView layoutX="9.0" layoutY="47.0" prefHeight="322.0" prefWidth="582.0">
          <columns>
             <TableColumn prefWidth="77.5999755859375" text="Название" />
@@ -18,5 +15,10 @@
             <TableColumn prefWidth="161.59991455078125" text="Уровень соревнований" />
          </columns>
       </TableView>
+      <Button layoutX="10.0" layoutY="11.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Назад" />
+      <Button layoutX="92.0" layoutY="12.0" mnemonicParsing="false" text="Изменить" />
+      <Button layoutX="331.0" layoutY="11.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="69.0" text="Удалить" />
+      <Button layoutX="250.0" layoutY="12.0" mnemonicParsing="false" text="Просмотр" />
+      <Button layoutX="173.0" layoutY="12.0" mnemonicParsing="false" text="Добавить" />
    </children>
 </AnchorPane>

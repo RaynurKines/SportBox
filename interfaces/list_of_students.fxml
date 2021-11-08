@@ -11,16 +11,15 @@
         <columns>
           <TableColumn prefWidth="75.0" text="ID" />
           <TableColumn prefWidth="152.79998779296875" text="ФИО" />
-            <TableColumn prefWidth="48.79998779296875" text="Пол" />
-            <TableColumn prefWidth="89.60003662109375" text="Возраст" />
-            <TableColumn prefWidth="72.79998779296875" text="Факультет" />
-            <TableColumn prefWidth="77.5999755859375" text="Группа" />
-            <TableColumn prefWidth="59.2000732421875" text="Курс" />
+            <TableColumn prefWidth="111.99993896484375" text="Пол" />
+            <TableColumn prefWidth="117.5999755859375" text="Группа" />
+            <TableColumn prefWidth="123.19998168945312" text="Телефон" />
         </columns>
       </TableView>
-      <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" text="Добавить" />
+      <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Назад" />
       <Button layoutX="96.0" layoutY="14.0" mnemonicParsing="false" text="Изменить" />
-      <Button layoutX="185.0" layoutY="14.0" mnemonicParsing="false" text="Удалить" />
-      <Button layoutX="266.0" layoutY="14.0" mnemonicParsing="false" text="Просмотр" />
+      <Button layoutX="335.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="69.0" text="Удалить" />
+      <Button layoutX="254.0" layoutY="14.0" mnemonicParsing="false" text="Просмотр" />
+      <Button layoutX="177.0" layoutY="14.0" mnemonicParsing="false" text="Добавить" />
    </children>
 </AnchorPane>
