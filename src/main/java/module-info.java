@@ -6,4 +6,7 @@ module com.example.sportbox {
 
     opens com.example.sportbox to javafx.fxml;
     exports com.example.sportbox;
+    exports com.example.sportbox.model;
+    exports com.example.sportbox.controllers;
+    opens com.example.sportbox.controllers to javafx.fxml;
 }

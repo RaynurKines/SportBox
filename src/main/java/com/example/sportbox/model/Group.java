@@ -13,10 +13,9 @@ public class Group {
     private Faculty faculty;
     private Date dateStart;
 
-    public Group(int groupId, String name, List<Student> students, Faculty faculty, Date dateStart) {
+    public Group(int groupId, String name, Faculty faculty, Date dateStart) {
         this.groupId = groupId;
         this.name = name;
-        this.students = students;
         this.faculty = faculty;
         this.dateStart = dateStart;
     }
