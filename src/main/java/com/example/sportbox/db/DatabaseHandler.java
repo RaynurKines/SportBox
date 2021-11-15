@@ -19,9 +19,6 @@ public class DatabaseHandler extends Configs {
         return dbConnection;
 
     }
-    public void showParticipant(){
-
-    }
 
     /*public List<Participant> getParticipants() throws SQLException, ClassNotFoundException {
         List<Participant> list = new ArrayList<Participant>();

@@ -6,15 +6,15 @@ import java.util.List;
 
 public class Student {
 
-    private int studentId;
+    private int Id;
     private String name;
     private Sex sex;
     private Group group;
     private List<Result> results;
     private long phone;
 
-    public Student(int studentId, String name, Sex sex, Group group, List<Result> results, long phone) {
-        this.studentId = studentId;
+    public Student(int Id, String name, Sex sex, Group group, List<Result> results, long phone) {
+        this.Id = Id;
         this.name = name;
         this.sex = sex;
         this.group = group;
@@ -22,12 +22,12 @@ public class Student {
         this.phone = phone;
     }
 
-    public int getStudent_id() {
-        return studentId;
+    public int getId() {
+        return Id;
     }
 
-    public void setStudent_id(int studentId) {
-        this.studentId = studentId;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public String getName() {
