@@ -6,6 +6,8 @@ import com.example.sportbox.model.Result;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.Faculty;
 import com.example.sportbox.model.enums.Sex;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,10 +48,10 @@ public class ListOfStudentsController {
     private TableColumn<Student, String> patronymicColumn;
 
     @FXML
-    private TableColumn<Student, Sex> sexColumn;
+    private TableColumn<Student, String> sexColumn;
 
     @FXML
-    private TableColumn<Student, Group> groupColumn;
+    private TableColumn<Student, String> groupColumn;
 
     @FXML
     private TableColumn<Student, Long> phoneColumn;
@@ -64,8 +66,8 @@ public class ListOfStudentsController {
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("lastname"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
         patronymicColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("patronymic"));
-        sexColumn.setCellValueFactory(new PropertyValueFactory<Student, Sex>("sex"));
-        groupColumn.setCellValueFactory(new PropertyValueFactory<Student, Group>("group"));
+        sexColumn.setCellValueFactory(cellData -> new SimpleStringProperty((String) cellData.getValue().getSex().getLabel()));
+        groupColumn.setCellValueFactory(cellData -> new SimpleStringProperty((String) cellData.getValue().getGroup().getName()));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<Student, Long>("phone"));
         // заполняем таблицу данными
         tableStudents.setItems(studentsData);
@@ -74,7 +76,7 @@ public class ListOfStudentsController {
     // подготавливаем данные для таблицы
     private void initData() throws SQLException, ClassNotFoundException {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-
+        databaseHandler.getStudents();
         studentsData.addAll(databaseHandler.getStudents());
     }
 

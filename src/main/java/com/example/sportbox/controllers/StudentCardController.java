@@ -1,5 +1,6 @@
 package com.example.sportbox.controllers;
 
+import com.example.sportbox.db.DatabaseHandler;
 import com.example.sportbox.model.Group;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.Sex;
@@ -9,8 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,38 +18,47 @@ import java.sql.SQLException;
 
 public class StudentCardController {
 
-    Student student = new Student();
+    private int id;
 
     @FXML
     private Button backButton;
 
     @FXML
-    public Text lastnameText;
+    private Button changeButton;
 
     @FXML
-    private Text nameText;
+    private Button saveButton;
 
     @FXML
-    private Text patronymicText;
+    public TextField lastnameTextField;
 
     @FXML
-    private Text sexText;
+    private TextField nameTextField;
 
     @FXML
-    private Text groupText;
+    private TextField patronymicTextField;
 
     @FXML
-    private Text phoneText;
+    private TextField sexTextField;
+
+    @FXML
+    private TextField groupTextField;
+
+    @FXML
+    private TextField phoneTextField;
 
 
     @FXML
     public void initialize(Student student) {
-        lastnameText.setText(student.getLastname());
-        nameText.setText(student.getName());
-        patronymicText.setText(student.getPatronymic());
-        sexText.setText(String.valueOf(student.getSex()));
-        groupText.setText(student.getGroup().getName());
-        phoneText.setText(String.valueOf(student.getPhone()));
+
+        id = student.getId();
+
+        lastnameTextField.setText(student.getLastname());
+        nameTextField.setText(student.getName());
+        patronymicTextField.setText(student.getPatronymic());
+        sexTextField.setText(String.valueOf(student.getSex().getLabel()));
+        groupTextField.setText(student.getGroup().getName());
+        phoneTextField.setText(String.valueOf(student.getPhone()));
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -60,5 +69,53 @@ public class StudentCardController {
         Stage stage = new Stage();
         stage.setScene(studentScene);
         stage.show();
+    }
+
+    public void changeButtonAction(ActionEvent actionEvent) {
+        changeButton.setDisable(true);
+        saveButton.setDisable(false);
+        saveButton.setVisible(true);
+
+        lastnameTextField.setEditable(true);
+        nameTextField.setEditable(true);
+        patronymicTextField.setEditable(true);
+        sexTextField.setEditable(true);
+        groupTextField.setEditable(true);
+        phoneTextField.setEditable(true);
+    }
+
+    public void saveButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+
+        Student updatedStudent = new Student();
+
+        String lastname = lastnameTextField.getText();
+        String name = nameTextField.getText();
+        String patronymic = patronymicTextField.getText();
+        Sex sex = Sex.getSexByLabel(sexTextField.getText());
+        Group group = dbHandler.getGroupByName(groupTextField.getText());
+        Long phone = Long.parseLong(phoneTextField.getText());
+
+        updatedStudent.setId(id);
+        updatedStudent.setLastname(lastname);
+        updatedStudent.setName(name);
+        updatedStudent.setPatronymic(patronymic);
+        updatedStudent.setSex(sex);
+        updatedStudent.setGroup(group);
+        updatedStudent.setPhone(phone);
+
+        dbHandler.updateStudent(updatedStudent);
+        initialize(updatedStudent);
+
+        changeButton.setDisable(false);
+        saveButton.setDisable(true);
+        saveButton.setVisible(false);
+
+        lastnameTextField.setEditable(false);
+        nameTextField.setEditable(false);
+        patronymicTextField.setEditable(false);
+        sexTextField.setEditable(false);
+        groupTextField.setEditable(false);
+        phoneTextField.setEditable(false);
     }
 }

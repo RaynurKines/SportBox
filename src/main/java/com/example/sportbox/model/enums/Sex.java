@@ -17,12 +17,16 @@ public enum Sex {
         this.label = label;
     }
 
-    public static Sex getSexByLabel(String label){
-        for(Sex s : Sex.values()){
-            if(label == s.getLabel())
-                return s;
+    private static Map<String, Sex> map = new HashMap<>();
+    static {
+        for (Sex sex : Sex.values()){
+            map.put(sex.label, sex);
         }
-        return null;
+    }
+
+    // get по uid
+    public static Sex getSexByLabel(String label) {
+        return map.get(label);
     }
 
 }

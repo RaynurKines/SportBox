@@ -37,16 +37,17 @@ public class DatabaseHandler extends Configs {
             student.setName(resultSet.getString("name"));
             student.setPatronymic(resultSet.getString("patronymic"));
             student.setSex(Sex.getSexByLabel(resultSet.getString("sex")));
-            student.setGroup(getGroup(resultSet.getInt("group_id")));
-            Long phone = resultSet.getLong("phone");
+            student.setGroup(getGroupById(resultSet.getInt("group_id")));
+            student.setPhone(resultSet.getLong("phone"));
             list.add(student);
         }
         return list;
     }
 
-    public Group getGroup(int id) throws SQLException, ClassNotFoundException {
-        String selectGroup = String.format("SELECT * FROM sportbox.group where group_id = %id", id);
+    public Group getGroupById(int id) throws SQLException, ClassNotFoundException {
+        String selectGroup = "SELECT * FROM sportbox.group where group_id=?";
         PreparedStatement prSt = getDbConnection().prepareStatement(selectGroup);
+        prSt.setInt(1, id);
         ResultSet resultSet = prSt.executeQuery();
         Group group = new Group();
         if (resultSet.next()) {
@@ -56,5 +57,48 @@ public class DatabaseHandler extends Configs {
             group.setDateStart(resultSet.getDate("datestart"));
         }
         return group;
+    }
+
+    public Group getGroupByName(String name) throws SQLException, ClassNotFoundException {
+        String selectGroup = "SELECT * FROM sportbox.group where name=?";
+        PreparedStatement prSt = getDbConnection().prepareStatement(selectGroup);
+        prSt.setString(1, name);
+        ResultSet resultSet = prSt.executeQuery();
+        Group group = new Group();
+        if (resultSet.next()) {
+            group.setGroupId(resultSet.getInt("group_id"));
+            group.setName(resultSet.getString("name"));
+            group.setFaculty(Faculty.getFacultyByLabel(resultSet.getString("faculty")));
+            group.setDateStart(resultSet.getDate("datestart"));
+        }
+        return group;
+    }
+
+    public void updateStudent(Student student) throws SQLException, ClassNotFoundException {
+        int studentId = student.getId();
+
+        String lastname = student.getLastname();
+        String name = student.getName();
+        String patronymic = student.getPatronymic();
+        String sex = student.getSex().getLabel();
+        int groupId = student.getGroup().getGroupId();
+        Long phone = student.getPhone();
+
+        String updateStudent = "UPDATE student SET lastname=?, name=?, patronymic=?, sex=?, group_id=?, phone=? WHERE student_id=?";
+        PreparedStatement prSt = getDbConnection().prepareStatement(updateStudent);
+        prSt.setString(1, lastname);
+        prSt.setString(2, name);
+        prSt.setString(3, patronymic);
+        prSt.setString(4, sex);
+        prSt.setInt(5, groupId);
+        prSt.setLong(6, phone);
+        prSt.setInt(7, studentId);
+
+        int rowsUpdated = prSt.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("An existing student was updated successfully!");
+        }
+        else
+            System.out.println("BAD");
     }
 }
