@@ -36,7 +36,13 @@ public class ListOfStudentsController {
     private TableColumn<Student, Integer> idColumn;
 
     @FXML
+    private TableColumn<Student, String> lastnameColumn;
+
+    @FXML
     private TableColumn<Student, String> nameColumn;
+
+    @FXML
+    private TableColumn<Student, String> patronymicColumn;
 
     @FXML
     private TableColumn<Student, Sex> sexColumn;
@@ -54,7 +60,9 @@ public class ListOfStudentsController {
 
         // устанавливаем тип и значение которое должно хранится в колонке
         idColumn.setCellValueFactory(new PropertyValueFactory<Student, Integer>("Id"));
+        lastnameColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("lastname"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+        patronymicColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("patronymic"));
         sexColumn.setCellValueFactory(new PropertyValueFactory<Student, Sex>("sex"));
         groupColumn.setCellValueFactory(new PropertyValueFactory<Student, Group>("group"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<Student, Long>("phone"));
@@ -65,11 +73,11 @@ public class ListOfStudentsController {
     // подготавливаем данные для таблицы
     private void initData() throws SQLException, ClassNotFoundException {
 
-        studentsData.add(new Student(1, "Alex", Sex.female, null, null, 79543035983L));
-        studentsData.add(new Student(2, "Bob", Sex.male, null, null, 79543035983L));
-        studentsData.add(new Student(3, "Jack", Sex.male, null, null, 79543035983L));
-        studentsData.add(new Student(4, "Mike", Sex.male, null, null, 79543035983L));
-        studentsData.add(new Student(5, "Colin", Sex.male, null, null, 79543035983L));
+        studentsData.add(new Student(1, "Alex", "Morozova", "Petrovichna", Sex.female, null, null, 79543035983L));
+        studentsData.add(new Student(2, "Bob", "Marley", "Johnovich", Sex.male, null, null, 79543035983L));
+        studentsData.add(new Student(3, "Jack", "Van", "Dam", Sex.male, null, null, 79543035983L));
+        studentsData.add(new Student(4, "Mike", "Stalone", "Igorevich", Sex.male, null, null, 79543035983L));
+        studentsData.add(new Student(5, "Colin", "Rasputin", "Borisovich", Sex.male, null, null, 79543035983L));
         /*DatabaseHandler databaseHandler = new DatabaseHandler();
         databaseHandler.getParticipants();
 
@@ -84,5 +92,35 @@ public class ListOfStudentsController {
         Stage stage = new Stage();
         stage.setScene(homeScene);
         stage.show();
+    }
+
+    public void viewingButtonAction(ActionEvent actionEvent) throws IOException {
+
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+
+        Student student = tableStudents.getSelectionModel().getSelectedItem();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("student_card.fxml"));
+        loader.load();
+        Parent p = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(p));
+        stage.show();
+        StudentCardController controller = loader.getController();
+        controller.initialize(student);
+
+        /*FXMLLoader loader = FXMLLoader.load(getClass().getClassLoader().getResource("student_card.fxml"));
+        Parent root;
+
+        StudentCardController scController = loader.getController();
+        scController.initData(student);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();*/
     }
 }

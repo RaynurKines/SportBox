@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportbox.controllers.StudentCardController">
    <children>
       <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Фамилия" />
       <Text layoutX="14.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя" />
@@ -23,19 +21,19 @@
             <TableColumn prefWidth="93.60003662109375" text="Место" />
         </columns>
       </TableView>
-      <Text fill="#949494d6" layoutX="16.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Фамилия" />
+      <Text fx:id="lastnameText" fill="#949494d6" layoutX="16.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Фамилия" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="9.0" layoutY="73.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+      <Text fx:id="nameText" fill="#949494d6" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="10.0" layoutY="130.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
-      <Text fill="#949494d6" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя" />
-      <Text fill="#949494d6" layoutX="15.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Отчество" />
+      <Text fx:id="patronymicText" fill="#949494d6" layoutX="15.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Отчество" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="11.0" layoutY="181.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="13.0" layoutY="287.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
-      <Text fill="#949494d6" layoutX="20.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Группа" />
+      <Text fx:id="sexText" fill="#949494d6" layoutX="19.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пол" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="13.0" layoutY="233.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
-      <Text fill="#949494d6" layoutX="19.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пол" />
-      <Text fill="#949494d6" layoutX="17.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Телефон" />
+      <Text fx:id="groupText" fill="#949494d6" layoutX="20.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Группа" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="13.0" layoutY="287.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+      <Text fx:id="phoneText" fill="#949494d6" layoutX="17.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Телефон" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#909294" height="26.0" layoutX="14.0" layoutY="338.0" opacity="0.19" stroke="BLACK" strokeType="INSIDE" width="150.0" />
-      <Button layoutX="20.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Назад" />
+      <Button fx:id="backButton" layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="26.0" prefWidth="75.0" text="Назад" />
       <Button layoutX="114.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Изменить" />
    </children>
 </AnchorPane>
