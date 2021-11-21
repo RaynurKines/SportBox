@@ -9,9 +9,12 @@ public class Group {
 
     private int groupId;
     private String name;
-    private List<Student> students;
     private Faculty faculty;
     private Date dateStart;
+    private List<Student> students;
+
+    public Group() {
+    }
 
     public Group(int groupId, String name, Faculty faculty, Date dateStart) {
         this.groupId = groupId;

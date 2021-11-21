@@ -18,14 +18,13 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String lastname, String name, String patronymic, Sex sex, Group group, List<Result> results, long phone) {
+    public Student(int id, String lastname, String name, String patronymic, Sex sex, Group group, long phone) {
         Id = id;
         this.name = name;
         this.lastname = lastname;
         this.patronymic = patronymic;
         this.sex = sex;
         this.group = group;
-        this.results = results;
         this.phone = phone;
     }
 

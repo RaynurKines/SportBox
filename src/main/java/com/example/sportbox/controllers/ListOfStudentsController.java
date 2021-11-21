@@ -1,5 +1,6 @@
 package com.example.sportbox.controllers;
 
+import com.example.sportbox.db.DatabaseHandler;
 import com.example.sportbox.model.Group;
 import com.example.sportbox.model.Result;
 import com.example.sportbox.model.Student;
@@ -72,16 +73,9 @@ public class ListOfStudentsController {
 
     // подготавливаем данные для таблицы
     private void initData() throws SQLException, ClassNotFoundException {
+        DatabaseHandler databaseHandler = new DatabaseHandler();
 
-        studentsData.add(new Student(1, "Alex", "Morozova", "Petrovichna", Sex.female, null, null, 79543035983L));
-        studentsData.add(new Student(2, "Bob", "Marley", "Johnovich", Sex.male, null, null, 79543035983L));
-        studentsData.add(new Student(3, "Jack", "Van", "Dam", Sex.male, null, null, 79543035983L));
-        studentsData.add(new Student(4, "Mike", "Stalone", "Igorevich", Sex.male, null, null, 79543035983L));
-        studentsData.add(new Student(5, "Colin", "Rasputin", "Borisovich", Sex.male, null, null, 79543035983L));
-        /*DatabaseHandler databaseHandler = new DatabaseHandler();
-        databaseHandler.getParticipants();
-
-        participantsData.addAll(databaseHandler.getParticipants());*/
+        studentsData.addAll(databaseHandler.getStudents());
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
