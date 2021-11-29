@@ -75,24 +75,16 @@ public class DatabaseHandler extends Configs {
     }
 
     public void updateStudent(Student student) throws SQLException, ClassNotFoundException {
-        int studentId = student.getId();
-
-        String lastname = student.getLastname();
-        String name = student.getName();
-        String patronymic = student.getPatronymic();
-        String sex = student.getSex().getLabel();
-        int groupId = student.getGroup().getGroupId();
-        Long phone = student.getPhone();
 
         String updateStudent = "UPDATE student SET lastname=?, name=?, patronymic=?, sex=?, group_id=?, phone=? WHERE student_id=?";
         PreparedStatement prSt = getDbConnection().prepareStatement(updateStudent);
-        prSt.setString(1, lastname);
-        prSt.setString(2, name);
-        prSt.setString(3, patronymic);
-        prSt.setString(4, sex);
-        prSt.setInt(5, groupId);
-        prSt.setLong(6, phone);
-        prSt.setInt(7, studentId);
+        prSt.setString(1, student.getLastname());
+        prSt.setString(2, student.getName());
+        prSt.setString(3, student.getPatronymic());
+        prSt.setString(4, student.getSex().getLabel());
+        prSt.setInt(5, student.getGroup().getGroupId());
+        prSt.setLong(6, student.getPhone());
+        prSt.setInt(7, student.getId());
 
         int rowsUpdated = prSt.executeUpdate();
         if (rowsUpdated > 0) {
@@ -100,5 +92,31 @@ public class DatabaseHandler extends Configs {
         }
         else
             System.out.println("BAD");
+    }
+
+    public void deleteStudent(Student student) throws SQLException, ClassNotFoundException {
+        String updateStudent = "DELETE FROM student WHERE student_id=?";
+        PreparedStatement prSt = getDbConnection().prepareStatement(updateStudent);
+        prSt.setInt(1, student.getId());
+
+        int rowsUpdated = prSt.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("An existing student was updated successfully!");
+        }
+        else
+            System.out.println("BAD");
+    }
+
+    public void createStudent(Student student) throws SQLException, ClassNotFoundException {
+        String createStudent = "INSERT INTO student (lastname, name, patronymic, sex, group_id, phone) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement prSt = getDbConnection().prepareStatement(createStudent);
+        prSt.setString(1, student.getLastname());
+        prSt.setString(2, student.getName());
+        prSt.setString(3, student.getPatronymic());
+        prSt.setString(4, student.getSex().getLabel());
+        prSt.setInt(5, student.getGroup().getGroupId());
+        prSt.setLong(6, student.getPhone());
+
+        prSt.executeUpdate();
     }
 }

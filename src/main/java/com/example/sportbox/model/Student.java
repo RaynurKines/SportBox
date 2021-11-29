@@ -18,6 +18,15 @@ public class Student {
     public Student() {
     }
 
+    public Student(String lastname, String name, String patronymic, Sex sex, Group group, long phone) {
+        this.name = name;
+        this.lastname = lastname;
+        this.patronymic = patronymic;
+        this.sex = sex;
+        this.group = group;
+        this.phone = phone;
+    }
+
     public Student(int id, String lastname, String name, String patronymic, Sex sex, Group group, long phone) {
         Id = id;
         this.name = name;

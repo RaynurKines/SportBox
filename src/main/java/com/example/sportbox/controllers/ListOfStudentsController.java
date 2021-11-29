@@ -106,17 +106,47 @@ public class ListOfStudentsController {
         stage.show();
         StudentCardController controller = loader.getController();
         controller.initialize(student);
+    }
 
-        /*FXMLLoader loader = FXMLLoader.load(getClass().getClassLoader().getResource("student_card.fxml"));
-        Parent root;
+    public void deleteButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
-        StudentCardController scController = loader.getController();
-        scController.initData(student);
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+
+        Student student = tableStudents.getSelectionModel().getSelectedItem();
+
+        databaseHandler.deleteStudent(student);
+        tableStudents.getItems().clear();
+        initialize();
+    }
+
+    public void changeButtonAction(ActionEvent actionEvent) throws IOException {
+
         Stage thisStage = (Stage) backButton.getScene().getWindow();
         thisStage.hide();
-        root = loader.load();
+
+        Student student = tableStudents.getSelectionModel().getSelectedItem();
+        if(student == null)
+            student = tableStudents.getItems().get(0);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("student_card.fxml"));
+        loader.load();
+        Parent p = loader.getRoot();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();*/
+        stage.setScene(new Scene(p));
+        stage.show();
+        StudentCardController controller = loader.getController();
+        controller.initialize(student);
+        controller.changeButtonAction(new ActionEvent());
+    }
+
+    public void createButtonAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("add_student.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefWidth="225.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportbox.controllers.AddStudent">
+    <children>
+      <VBox prefHeight="200.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="53.0" prefWidth="225.0">
+               <children>
+                    <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="75.0" text="Назад">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                    <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0" prefWidth="75.0" text="Сохранить">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+      
+            <VBox alignment="CENTER" prefHeight="304.0" prefWidth="225.0" spacing="10.0">
+              <TextField fx:id="lastnameTextField" alignment="CENTER" layoutX="15.0" layoutY="80.0" promptText="Фамилия" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+              <TextField fx:id="nameTextField" alignment="CENTER" layoutX="15.0" layoutY="130.0" promptText="Имя" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+              <TextField fx:id="patronymicTextField" alignment="CENTER" layoutX="15.0" layoutY="180.0" promptText="Отчество" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+              <TextField fx:id="sexTextField" alignment="CENTER" layoutX="15.0" layoutY="230.0" promptText="Пол" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+              <TextField fx:id="groupTextField" alignment="CENTER" layoutX="15.0" layoutY="280.0" promptText="Группа" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+              <TextField fx:id="phoneTextField" alignment="CENTER" layoutX="15.0" layoutY="330.0" promptText="Телефон" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="330.0" />
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+         </padding>
+      </VBox>
+    </children>
+</AnchorPane>

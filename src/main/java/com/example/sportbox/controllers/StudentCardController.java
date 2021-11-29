@@ -82,6 +82,8 @@ public class StudentCardController {
         sexTextField.setEditable(true);
         groupTextField.setEditable(true);
         phoneTextField.setEditable(true);
+
+        lastnameTextField.requestFocus();
     }
 
     public void saveButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
