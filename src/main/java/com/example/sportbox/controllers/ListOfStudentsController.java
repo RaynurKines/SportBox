@@ -62,7 +62,7 @@ public class ListOfStudentsController {
         initData();
 
         // устанавливаем тип и значение которое должно хранится в колонке
-        idColumn.setCellValueFactory(new PropertyValueFactory<Student, Integer>("Id"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Student, Integer>("studentId"));
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("lastname"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
         patronymicColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("patronymic"));
@@ -76,7 +76,6 @@ public class ListOfStudentsController {
     // подготавливаем данные для таблицы
     private void initData() throws SQLException, ClassNotFoundException {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        databaseHandler.getStudents();
         studentsData.addAll(databaseHandler.getStudents());
     }
 

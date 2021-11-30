@@ -1,9 +1,12 @@
 package com.example.sportbox.db;
 
 
+import com.example.sportbox.model.Event;
 import com.example.sportbox.model.Group;
 import com.example.sportbox.model.Student;
+import com.example.sportbox.model.enums.CompetitionLevel;
 import com.example.sportbox.model.enums.Faculty;
+import com.example.sportbox.model.enums.KindOfSport;
 import com.example.sportbox.model.enums.Sex;
 
 import java.sql.*;
@@ -32,7 +35,7 @@ public class DatabaseHandler extends Configs {
         ResultSet resultSet = prSt.executeQuery();
         while(resultSet.next()) {
             Student student = new Student();
-            student.setId(resultSet.getInt("student_id"));
+            student.setStudentId(resultSet.getInt("student_id"));
             student.setLastname(resultSet.getString("lastname"));
             student.setName(resultSet.getString("name"));
             student.setPatronymic(resultSet.getString("patronymic"));
@@ -40,6 +43,23 @@ public class DatabaseHandler extends Configs {
             student.setGroup(getGroupById(resultSet.getInt("group_id")));
             student.setPhone(resultSet.getLong("phone"));
             list.add(student);
+        }
+        return list;
+    }
+
+    public List<Event> getEvents() throws SQLException, ClassNotFoundException {
+        List<Event> list = new ArrayList<Event>();
+        String selectEvents = "SELECT * FROM sportbox.event";
+        PreparedStatement prSt = getDbConnection().prepareStatement(selectEvents);
+        ResultSet resultSet = prSt.executeQuery();
+        while(resultSet.next()) {
+            Event event = new Event();
+            event.setEventId(resultSet.getInt("event_id"));
+            event.setName(resultSet.getString("name"));
+            event.setDate(resultSet.getDate("date"));
+            event.setKindOfSport(KindOfSport.getKindOfSportByLabel(resultSet.getString("kindofsport")));
+            event.setCompetitionLevel(CompetitionLevel.getCompetitionLevelByLabel(resultSet.getString("level")));
+            list.add(event);
         }
         return list;
     }
@@ -84,7 +104,7 @@ public class DatabaseHandler extends Configs {
         prSt.setString(4, student.getSex().getLabel());
         prSt.setInt(5, student.getGroup().getGroupId());
         prSt.setLong(6, student.getPhone());
-        prSt.setInt(7, student.getId());
+        prSt.setInt(7, student.getStudentId());
 
         int rowsUpdated = prSt.executeUpdate();
         if (rowsUpdated > 0) {
@@ -95,9 +115,9 @@ public class DatabaseHandler extends Configs {
     }
 
     public void deleteStudent(Student student) throws SQLException, ClassNotFoundException {
-        String updateStudent = "DELETE FROM student WHERE student_id=?";
-        PreparedStatement prSt = getDbConnection().prepareStatement(updateStudent);
-        prSt.setInt(1, student.getId());
+        String deleteStudent = "DELETE FROM student WHERE student_id=?";
+        PreparedStatement prSt = getDbConnection().prepareStatement(deleteStudent);
+        prSt.setInt(1, student.getStudentId());
 
         int rowsUpdated = prSt.executeUpdate();
         if (rowsUpdated > 0) {
@@ -118,5 +138,47 @@ public class DatabaseHandler extends Configs {
         prSt.setLong(6, student.getPhone());
 
         prSt.executeUpdate();
+    }
+
+    public void deleteEvent(Event event) throws SQLException, ClassNotFoundException {
+        String deleteEvent = "DELETE FROM event WHERE event_id=?";
+        PreparedStatement prSt = getDbConnection().prepareStatement(deleteEvent);
+        prSt.setInt(1, event.getEventId());
+
+        int rowsUpdated = prSt.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("An existing event was updated successfully!");
+        }
+        else
+            System.out.println("BAD");
+    }
+
+    public void createEvent(Event event) throws SQLException, ClassNotFoundException {
+        String createEvent = "INSERT INTO event (name, date, kindofsport, level) VALUES (?, ?, ?, ?)";
+        PreparedStatement prSt = getDbConnection().prepareStatement(createEvent);
+        prSt.setString(1, event.getName());
+        prSt.setDate(2, (Date) event.getDate());
+        prSt.setString(3, event.getKindOfSport().getLabel());
+        prSt.setString(4, event.getCompetitionLevel().getLabel());
+
+        prSt.executeUpdate();
+    }
+
+    public void updateEvent(Event event) throws SQLException, ClassNotFoundException {
+
+        String updatedEvent = "UPDATE event SET name=?, date=?, kindofsport=?, level=? WHERE event_id=?";
+        PreparedStatement prSt = getDbConnection().prepareStatement(updatedEvent);
+        prSt.setString(1, event.getName());
+        prSt.setDate(2, event.getDate());
+        prSt.setString(3, event.getKindOfSport().getLabel());
+        prSt.setString(4, event.getCompetitionLevel().getLabel());
+        prSt.setInt(5, event.getEventId());
+
+        int rowsUpdated = prSt.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("An existing student was updated successfully!");
+        }
+        else
+            System.out.println("BAD");
     }
 }

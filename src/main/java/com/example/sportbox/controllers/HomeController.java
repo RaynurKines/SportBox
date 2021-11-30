@@ -22,7 +22,7 @@ public class HomeController {
 
     @FXML
     public void eventButtonAction(ActionEvent actionEvent) throws IOException {
-        Parent eventParent = FXMLLoader.load(getClass().getClassLoader().getResource("event.fxml"));
+        Parent eventParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_events.fxml"));
         Scene eventScene = new Scene(eventParent);
         Stage thisStage = (Stage) eventButton.getScene().getWindow();
         thisStage.hide();

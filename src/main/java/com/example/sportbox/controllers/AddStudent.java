@@ -20,7 +20,6 @@ public class AddStudent {
     @FXML
     private Button backButton;
 
-
     @FXML
     private Button saveButton;
 

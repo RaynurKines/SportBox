@@ -51,7 +51,7 @@ public class StudentCardController {
     @FXML
     public void initialize(Student student) {
 
-        id = student.getId();
+        id = student.getStudentId();
 
         lastnameTextField.setText(student.getLastname());
         nameTextField.setText(student.getName());
@@ -98,7 +98,7 @@ public class StudentCardController {
         Group group = dbHandler.getGroupByName(groupTextField.getText());
         Long phone = Long.parseLong(phoneTextField.getText());
 
-        updatedStudent.setId(id);
+        updatedStudent.setStudentId(id);
         updatedStudent.setLastname(lastname);
         updatedStudent.setName(name);
         updatedStudent.setPatronymic(patronymic);
