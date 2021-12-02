@@ -58,14 +58,13 @@ public class AddStudent {
 
     public void saveButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException {
 
-        Student student = new Student(
-                lastnameTextField.getText(),
-                nameTextField.getText(),
-                patronymicTextField.getText(),
-                Sex.getSexByLabel(sexTextField.getText()),
-                groupDao.getGroupByName(groupTextField.getText()),
-                Long.parseLong(phoneTextField.getText())
-        );
+        Student student = new Student();
+        student.setLastname(lastnameTextField.getText());
+        student.setName(nameTextField.getText());
+        student.setPatronymic(patronymicTextField.getText());
+        student.setSex(Sex.getSexByLabel(sexTextField.getText()));
+        student.setGroup(groupDao.getGroupByName(groupTextField.getText()));
+        student.setPhone(Long.parseLong(phoneTextField.getText()));
 
         studentDao.createStudent(student);
 

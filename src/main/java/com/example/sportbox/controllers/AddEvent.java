@@ -64,13 +64,16 @@ public class AddEvent {
 
     public void saveButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException, ParseException {
         java.util.Date date = java.util.Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         Event event = new Event(
                 nameTextField.getText(),
                 sqlDate,
                 KindOfSport.getKindOfSportByLabel(kindOfSportTextField.getText()),
+
                 CompetitionLevel.getCompetitionLevelByLabel(levelTextField.getText())
         );
+        event.setName(nameTextField.getText());
+        event.setDate(new java.sql.Date(date.getTime()));
+        event.setKindOfSport(KindOfSport.getKindOfSportByLabel(kindOfSportTextField.getText());
 
         eventDao.createEvent(event);
 

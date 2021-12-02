@@ -32,7 +32,7 @@ public class EventCardController {
 
     private ObservableList<Competition> competitionsData = FXCollections.observableArrayList();
 
-    private int id;
+//    private int id;
 
     @FXML
     private TableView<Competition> tableCompetitions;
@@ -72,8 +72,8 @@ public class EventCardController {
 
     @FXML
     public void initialize(Event event) throws SQLException, ClassNotFoundException {
-        id = event.getEventId();
-        initData(id);
+//        id = event.getEventId();
+//        initData(id);
 
         nameTextField.setText(event.getName());
         datePicker.setValue(event.getDate().toLocalDate());
@@ -118,7 +118,7 @@ public class EventCardController {
         KindOfSport kindOfSport = KindOfSport.getKindOfSportByLabel(kindOfSportTextField.getText());
         CompetitionLevel level = CompetitionLevel.getCompetitionLevelByLabel(levelTextField.getText());
 
-        updatedEvent.setEventId(id);
+//        updatedEvent.setEventId(id);
         updatedEvent.setName(name);
         updatedEvent.setDate(sqlDate);
         updatedEvent.setKindOfSport(kindOfSport);
@@ -154,7 +154,7 @@ public class EventCardController {
         for(Competition comp : list) {
             names.add(comp.getName());
         }
-        competitionDao.writeCompetitionsInDb(names, id);
+//        competitionDao.writeCompetitionsInDb(names, id);
 
         tableCompetitions.setEditable(false);
         createCompetitionsButton.setDisable(false);

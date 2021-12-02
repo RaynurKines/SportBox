@@ -2,6 +2,7 @@ package com.example.sportbox.model;
 
 import com.example.sportbox.model.enums.Sex;
 import lombok.*;
+import javax.persistence.*;
 
 import java.util.List;
 
@@ -9,22 +10,27 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Entity
 public class Student {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long studentId;
 
-    private int studentId;
-    @NonNull
     private String name;
-    @NonNull
     private String lastname;
-    @NonNull
     private String patronymic;
-    @NonNull
+
+    @Enumerated
     private Sex sex;
-    @NonNull
+
+    @ManyToOne(/*fetch = FetchType.LAZY*/)
     private Group group;
+
     @Singular
+    @OneToMany
     private List<Result> results;
+
     @NonNull
     private long phone;
 }

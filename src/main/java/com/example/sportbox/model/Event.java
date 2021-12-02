@@ -4,25 +4,30 @@ import com.example.sportbox.model.enums.CompetitionLevel;
 import com.example.sportbox.model.enums.KindOfSport;
 import lombok.*;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+@Entity
 public class Event {
 
-    private int eventId;
-    @NonNull
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long eventId;
+
     private String name;
-    @NonNull
     private Date date;
-    @NonNull
+    @Enumerated
     private KindOfSport kindOfSport;
+
     @Singular
+    @OneToMany
     private List<Competition> competitions;
-    @NonNull
+
+    @Enumerated
     private CompetitionLevel competitionLevel;
 
 
