@@ -1,6 +1,7 @@
 package com.example.sportbox.controllers;
 
 import com.example.sportbox.db.DatabaseHandler;
+import com.example.sportbox.db.EventDao;
 import com.example.sportbox.model.Event;
 import com.example.sportbox.model.enums.CompetitionLevel;
 import com.example.sportbox.model.enums.KindOfSport;
@@ -45,6 +46,8 @@ public class EventController {
     @FXML
     private TableColumn<Event, String> levelColumn;
 
+    EventDao eventDao = new EventDao();
+
     @FXML
     private void initialize() throws SQLException, ClassNotFoundException {
         initData();
@@ -57,10 +60,10 @@ public class EventController {
         tableEvents.setItems(eventsData);
     }
 
-    // подготавливаем данные для таблицы
+
     private void initData() throws SQLException, ClassNotFoundException {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        eventsData.addAll(databaseHandler.getEvents());
+        eventsData.addAll(eventDao.getEvents());
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -73,12 +76,14 @@ public class EventController {
         stage.show();
     }
 
-    public void viewingButtonAction(ActionEvent actionEvent) throws IOException {
+    public void viewingButtonAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
 
         Stage thisStage = (Stage) backButton.getScene().getWindow();
         thisStage.hide();
 
         Event event = tableEvents.getSelectionModel().getSelectedItem();
+        if (event == null)
+            event = tableEvents.getItems().get(0);
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("event_card.fxml"));
@@ -97,7 +102,7 @@ public class EventController {
 
         Event event = tableEvents.getSelectionModel().getSelectedItem();
 
-        databaseHandler.deleteEvent(event);
+        eventDao.deleteEvent(event);
         if(tableEvents.getItems().size()>1){
             tableEvents.getItems().clear();
             initialize();
@@ -106,7 +111,7 @@ public class EventController {
             tableEvents.getItems().clear();
     }
 
-    public void changeButtonAction(ActionEvent actionEvent) throws IOException {
+    public void changeButtonAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
 
         Stage thisStage = (Stage) backButton.getScene().getWindow();
         thisStage.hide();

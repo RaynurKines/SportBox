@@ -1,6 +1,8 @@
 package com.example.sportbox.controllers;
 
 import com.example.sportbox.db.DatabaseHandler;
+import com.example.sportbox.db.GroupDao;
+import com.example.sportbox.db.StudentDao;
 import com.example.sportbox.model.Group;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.Sex;
@@ -47,6 +49,8 @@ public class StudentCardController {
     @FXML
     private TextField phoneTextField;
 
+    StudentDao studentDao = new StudentDao();
+    GroupDao groupDao = new GroupDao();
 
     @FXML
     public void initialize(Student student) {
@@ -95,7 +99,7 @@ public class StudentCardController {
         String name = nameTextField.getText();
         String patronymic = patronymicTextField.getText();
         Sex sex = Sex.getSexByLabel(sexTextField.getText());
-        Group group = dbHandler.getGroupByName(groupTextField.getText());
+        Group group = groupDao.getGroupByName(groupTextField.getText());
         Long phone = Long.parseLong(phoneTextField.getText());
 
         updatedStudent.setStudentId(id);
@@ -106,7 +110,7 @@ public class StudentCardController {
         updatedStudent.setGroup(group);
         updatedStudent.setPhone(phone);
 
-        dbHandler.updateStudent(updatedStudent);
+        studentDao.updateStudent(updatedStudent);
         initialize(updatedStudent);
 
         changeButton.setDisable(false);

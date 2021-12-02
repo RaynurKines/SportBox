@@ -6,21 +6,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportbox.controllers.EventCardController">
    <children>
-      <Text layoutX="15.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название" />
-      <Text layoutX="15.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата проведения" />
-      <Text layoutX="15.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вид спорта" />
-      <Text layoutX="15.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Уровень события" />
-      <TableView layoutX="182.0" layoutY="71.0" prefHeight="289.0" prefWidth="405.0">
+      <Text layoutX="15.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название" />
+      <Text layoutX="15.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата проведения" />
+      <Text layoutX="15.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вид спорта" />
+      <Text layoutX="15.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Уровень события" />
+      <TableView fx:id="tableCompetitions" layoutX="182.0" layoutY="71.0" prefHeight="289.0" prefWidth="405.0">
         <columns>
-          <TableColumn prefWidth="404.7999969482422" text="Название состязания" />
+          <TableColumn fx:id="nameColumn" prefWidth="404.7999969482422" text="Название состязания" />
         </columns>
       </TableView>
-      <TextField fx:id="nameTextField" editable="false" layoutX="15.0" layoutY="80.0" promptText="Название" />
-      <DatePicker fx:id="datePicker" editable="false" layoutX="15.0" layoutY="130.0" prefHeight="25.0" prefWidth="149.0" promptText="Дата проведения" />
-      <TextField fx:id="kindOfSportTextField" editable="false" layoutX="15.0" layoutY="180.0" promptText="Вид спорта" />
-      <TextField fx:id="levelTextField" editable="false" layoutX="15.0" layoutY="230.0" promptText="Уровень события" />
+      <TextField fx:id="nameTextField" editable="false" layoutX="15.0" layoutY="95.0" promptText="Название" />
+      <DatePicker fx:id="datePicker" editable="false" layoutX="15.0" layoutY="145.0" prefHeight="25.0" prefWidth="149.0" promptText="Дата проведения" />
+      <TextField fx:id="kindOfSportTextField" editable="false" layoutX="15.0" layoutY="195.0" promptText="Вид спорта" />
+      <TextField fx:id="levelTextField" editable="false" layoutX="15.0" layoutY="245.0" promptText="Уровень события" />
       <Button fx:id="backButton" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="75.0" text="Назад" />
       <Button fx:id="changeButton" layoutX="115.0" layoutY="15.0" mnemonicParsing="false" onAction="#changeButtonAction" prefHeight="25.0" prefWidth="75.0" text="Изменить" />
       <Button fx:id="saveButton" disable="true" layoutX="215.0" layoutY="15.0" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="25.0" prefWidth="75.0" text="Сохранить" visible="false" />
+      <Button fx:id="createCompetitionsButton" layoutX="363.0" layoutY="15.0" mnemonicParsing="false" onAction="#createCompetitionsButtonAction" text="Добавить состязания" />
+      <Button fx:id="saveCompetitionsButton" disable="true" layoutX="512.0" layoutY="15.0" mnemonicParsing="false" onAction="#saveCompetitionsButtonAction" text="Сохранить" visible="false" />
    </children>
 </AnchorPane>

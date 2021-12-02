@@ -1,6 +1,7 @@
 package com.example.sportbox.controllers;
 
 import com.example.sportbox.db.DatabaseHandler;
+import com.example.sportbox.db.EventDao;
 import com.example.sportbox.model.Event;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.CompetitionLevel;
@@ -14,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -47,7 +50,7 @@ public class AddEvent {
     @FXML
     private TextField kindOfSportTextField;
 
-    DatabaseHandler dbHandler = new DatabaseHandler();
+    EventDao eventDao = new EventDao();
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         Parent eventParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_events.fxml"));
@@ -69,7 +72,7 @@ public class AddEvent {
                 CompetitionLevel.getCompetitionLevelByLabel(levelTextField.getText())
         );
 
-        dbHandler.createEvent(event);
+        eventDao.createEvent(event);
 
         Parent eventParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_events.fxml"));
         Scene eventScene = new Scene(eventParent);
@@ -78,5 +81,29 @@ public class AddEvent {
         Stage stage = new Stage();
         stage.setScene(eventScene);
         stage.show();
+    }
+
+    public void nameEnterAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            datePicker.requestFocus();
+        }
+    }
+
+    public void dateEnterAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            kindOfSportTextField.requestFocus();
+        }
+    }
+
+    public void kindOfSportEnterAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            levelTextField.requestFocus();
+        }
+    }
+
+    public void levelEnterAction(KeyEvent keyEvent) throws SQLException, IOException, ParseException, ClassNotFoundException {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            saveButtonAction(new ActionEvent());
+        }
     }
 }

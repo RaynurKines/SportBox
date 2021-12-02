@@ -1,6 +1,7 @@
 package com.example.sportbox.controllers;
 
 import com.example.sportbox.db.DatabaseHandler;
+import com.example.sportbox.db.StudentDao;
 import com.example.sportbox.model.Group;
 import com.example.sportbox.model.Result;
 import com.example.sportbox.model.Student;
@@ -56,6 +57,8 @@ public class ListOfStudentsController {
     @FXML
     private TableColumn<Student, Long> phoneColumn;
 
+    StudentDao studentDao = new StudentDao();
+
     // инициализируем форму данными
     @FXML
     private void initialize() throws SQLException, ClassNotFoundException {
@@ -76,7 +79,7 @@ public class ListOfStudentsController {
     // подготавливаем данные для таблицы
     private void initData() throws SQLException, ClassNotFoundException {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        studentsData.addAll(databaseHandler.getStudents());
+        studentsData.addAll(studentDao.getStudents());
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -95,6 +98,8 @@ public class ListOfStudentsController {
         thisStage.hide();
 
         Student student = tableStudents.getSelectionModel().getSelectedItem();
+        if (student == null)
+            student = tableStudents.getItems().get(0);
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("student_card.fxml"));
@@ -113,7 +118,7 @@ public class ListOfStudentsController {
 
         Student student = tableStudents.getSelectionModel().getSelectedItem();
 
-        databaseHandler.deleteStudent(student);
+        studentDao.deleteStudent(student);
         tableStudents.getItems().clear();
         initialize();
     }

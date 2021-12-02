@@ -1,6 +1,8 @@
 package com.example.sportbox.controllers;
 
 import com.example.sportbox.db.DatabaseHandler;
+import com.example.sportbox.db.GroupDao;
+import com.example.sportbox.db.StudentDao;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.Sex;
 import javafx.event.ActionEvent;
@@ -41,7 +43,8 @@ public class AddStudent {
     @FXML
     private TextField phoneTextField;
 
-    DatabaseHandler dbHandler = new DatabaseHandler();
+    GroupDao groupDao = new GroupDao();
+    StudentDao studentDao = new StudentDao();
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         Parent studentParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_students.fxml"));
@@ -60,11 +63,11 @@ public class AddStudent {
                 nameTextField.getText(),
                 patronymicTextField.getText(),
                 Sex.getSexByLabel(sexTextField.getText()),
-                dbHandler.getGroupByName(groupTextField.getText()),
+                groupDao.getGroupByName(groupTextField.getText()),
                 Long.parseLong(phoneTextField.getText())
         );
 
-        dbHandler.createStudent(student);
+        studentDao.createStudent(student);
 
         Parent studentParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_students.fxml"));
         Scene studentScene = new Scene(studentParent);

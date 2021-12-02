@@ -27,10 +27,10 @@
                 </HBox>
 
                 <VBox alignment="CENTER" prefHeight="304.0" prefWidth="225.0" spacing="10.0">
-                    <TextField fx:id="nameTextField" alignment="CENTER" layoutX="15.0" layoutY="80.0" promptText="Название" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                    <DatePicker fx:id="datePicker" promptText="Дата проведения" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0"/>
-                    <TextField fx:id="kindOfSportTextField" alignment="CENTER" layoutX="15.0" layoutY="180.0" promptText="Вид спорта" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                    <TextField fx:id="levelTextField" alignment="CENTER" layoutX="15.0" layoutY="230.0" promptText="Уровень" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                    <TextField fx:id="nameTextField" alignment="CENTER" layoutX="15.0" layoutY="80.0" promptText="Название" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" onKeyPressed="#nameEnterAction" />
+                    <DatePicker fx:id="datePicker" promptText="Дата проведения" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" onKeyPressed="#dateEnterAction" />
+                    <TextField fx:id="kindOfSportTextField" alignment="CENTER" layoutX="15.0" layoutY="180.0" promptText="Вид спорта" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" onKeyPressed="#kindOfSportEnterAction" />
+                    <TextField fx:id="levelTextField" alignment="CENTER" layoutX="15.0" layoutY="230.0" promptText="Уровень" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" onKeyPressed="#levelEnterAction" />
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
