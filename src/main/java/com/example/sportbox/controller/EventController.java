@@ -1,11 +1,7 @@
-package com.example.sportbox.controllers;
+package com.example.sportbox.controller;
 
-import com.example.sportbox.db.DatabaseHandler;
-import com.example.sportbox.db.EventDao;
 import com.example.sportbox.model.Event;
-import com.example.sportbox.model.enums.CompetitionLevel;
-import com.example.sportbox.model.enums.KindOfSport;
-import javafx.application.Platform;
+import com.example.sportbox.service.EventService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +42,7 @@ public class EventController {
     @FXML
     private TableColumn<Event, String> levelColumn;
 
-    EventDao eventDao = new EventDao();
+    EventService eventService;
 
     @FXML
     private void initialize() throws SQLException, ClassNotFoundException {
@@ -62,8 +58,7 @@ public class EventController {
 
 
     private void initData() throws SQLException, ClassNotFoundException {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        eventsData.addAll(eventDao.getEvents());
+        eventsData.addAll(eventService.findAllEvents());
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -97,12 +92,9 @@ public class EventController {
     }
 
     public void deleteButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-
         Event event = tableEvents.getSelectionModel().getSelectedItem();
 
-        eventDao.deleteEvent(event);
+        eventService.deleteEvent(event);
         if(tableEvents.getItems().size()>1){
             tableEvents.getItems().clear();
             initialize();

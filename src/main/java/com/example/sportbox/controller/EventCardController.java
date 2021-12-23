@@ -1,15 +1,11 @@
-package com.example.sportbox.controllers;
+package com.example.sportbox.controller;
 
-import com.example.sportbox.db.CompetitionDao;
-import com.example.sportbox.db.DatabaseHandler;
-import com.example.sportbox.db.EventDao;
 import com.example.sportbox.model.Competition;
 import com.example.sportbox.model.Event;
-import com.example.sportbox.model.Group;
-import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.CompetitionLevel;
 import com.example.sportbox.model.enums.KindOfSport;
-import com.example.sportbox.model.enums.Sex;
+import com.example.sportbox.service.CompetitionService;
+import com.example.sportbox.service.EventService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,13 +63,13 @@ public class EventCardController {
     @FXML
     private TextField levelTextField;
 
-    EventDao eventDao = new EventDao();
-    CompetitionDao competitionDao = new CompetitionDao();
+    EventService eventService;
+    CompetitionService competitionService;
+    Event event;
 
     @FXML
     public void initialize(Event event) throws SQLException, ClassNotFoundException {
-//        id = event.getEventId();
-//        initData(id);
+        this.event = event;
 
         nameTextField.setText(event.getName());
         datePicker.setValue(event.getDate().toLocalDate());
@@ -82,8 +78,8 @@ public class EventCardController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("name"));
     }
 
-    private void initData(int id) throws SQLException, ClassNotFoundException {
-        competitionsData.addAll(competitionDao.getConnectionsByEventId(id));
+    private void initData() throws SQLException, ClassNotFoundException {
+        competitionsData.addAll(eventService.findCompetitions());
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -110,22 +106,15 @@ public class EventCardController {
     }
 
     public void saveButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        Event updatedEvent = new Event();
+        Date sqlDate = new java.sql.Date(java.util.Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
 
-        String name = nameTextField.getText();
-        java.util.Date date = java.util.Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date sqlDate = new java.sql.Date(date.getTime());
-        KindOfSport kindOfSport = KindOfSport.getKindOfSportByLabel(kindOfSportTextField.getText());
-        CompetitionLevel level = CompetitionLevel.getCompetitionLevelByLabel(levelTextField.getText());
+        event.setName(nameTextField.getText());
+        event.setDate(sqlDate);
+        event.setKindOfSport(KindOfSport.getKindOfSportByLabel(kindOfSportTextField.getText()));
+        event.setCompetitionLevel(CompetitionLevel.getCompetitionLevelByLabel(levelTextField.getText()));
 
-//        updatedEvent.setEventId(id);
-        updatedEvent.setName(name);
-        updatedEvent.setDate(sqlDate);
-        updatedEvent.setKindOfSport(kindOfSport);
-        updatedEvent.setCompetitionLevel(level);
-
-        eventDao.updateEvent(updatedEvent);
-        initialize(updatedEvent);
+        eventService.updateEvent(event);
+        initialize(event);
 
         changeButton.setDisable(false);
         saveButton.setDisable(true);
@@ -151,7 +140,7 @@ public class EventCardController {
         tableCompetitions.setEditable(false);
         List<Competition> list = tableCompetitions.getItems();
         List<String> names = new ArrayList<>();
-        for(Competition comp : list) {
+        for (Competition comp : list) {
             names.add(comp.getName());
         }
 //        competitionDao.writeCompetitionsInDb(names, id);

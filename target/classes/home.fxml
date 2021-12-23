@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportbox.controllers.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sportbox.controller.HomeController">
    <children>
       <Button fx:id="eventButton" layoutX="165.0" layoutY="45.0" mnemonicParsing="false" onAction="#eventButtonAction" prefHeight="64.0" prefWidth="270.0" text="Таблица событий" />
       <Button fx:id="studentButton" layoutX="165.0" layoutY="124.0" mnemonicParsing="false" onAction="#studentButtonAction" prefHeight="64.0" prefWidth="270.0" text="Таблица студентов" />

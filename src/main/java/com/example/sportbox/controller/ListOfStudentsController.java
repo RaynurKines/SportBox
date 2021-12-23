@@ -1,14 +1,8 @@
-package com.example.sportbox.controllers;
+package com.example.sportbox.controller;
 
-import com.example.sportbox.db.DatabaseHandler;
-import com.example.sportbox.db.StudentDao;
-import com.example.sportbox.model.Group;
-import com.example.sportbox.model.Result;
 import com.example.sportbox.model.Student;
-import com.example.sportbox.model.enums.Faculty;
-import com.example.sportbox.model.enums.Sex;
+import com.example.sportbox.service.StudentService;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
 public class ListOfStudentsController {
@@ -57,7 +50,7 @@ public class ListOfStudentsController {
     @FXML
     private TableColumn<Student, Long> phoneColumn;
 
-    StudentDao studentDao = new StudentDao();
+    StudentService studentService = new StudentService();
 
     // инициализируем форму данными
     @FXML
@@ -78,8 +71,8 @@ public class ListOfStudentsController {
 
     // подготавливаем данные для таблицы
     private void initData() throws SQLException, ClassNotFoundException {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        studentsData.addAll(studentDao.getStudents());
+        if (studentService.findAllStudents() != null)
+            studentsData.addAll(studentService.findAllStudents());
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -113,13 +106,8 @@ public class ListOfStudentsController {
     }
 
     public void deleteButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-
         Student student = tableStudents.getSelectionModel().getSelectedItem();
-
-        studentDao.deleteStudent(student);
-        tableStudents.getItems().clear();
+        studentService.deleteStudent(student);
         initialize();
     }
 
@@ -129,7 +117,7 @@ public class ListOfStudentsController {
         thisStage.hide();
 
         Student student = tableStudents.getSelectionModel().getSelectedItem();
-        if(student == null)
+        if (student == null)
             student = tableStudents.getItems().get(0);
 
         FXMLLoader loader = new FXMLLoader();

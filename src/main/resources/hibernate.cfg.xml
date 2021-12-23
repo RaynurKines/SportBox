@@ -24,17 +24,10 @@
         <property name="hibernate.dbcp.maxIdle">10</property>
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
-
-        <mapping class="com.example.sportbox.model.Competition" />
-        <mapping class="com.example.sportbox.model.Event" />
-        <mapping class="com.example.sportbox.model.Group" />
-        <mapping class="com.example.sportbox.model.Result" />
-        <mapping class="com.example.sportbox.model.Student" />
-
-        <mapping class="com.example.sportbox.model.enums.CompetitionLevel" />
-        <mapping class="com.example.sportbox.model.enums.Faculty" />
-        <mapping class="com.example.sportbox.model.enums.KindOfSport" />
-        <mapping class="com.example.sportbox.model.enums.Place" />
-        <mapping class="com.example.sportbox.model.enums.Sex" />
+        <mapping class="model.Student" />
+        <mapping class="model.Event" />
+        <mapping class="model.Competition" />
+        <mapping class="model.Group" />
+        <mapping class="model.Result" />
     </session-factory>
 </hibernate-configuration>

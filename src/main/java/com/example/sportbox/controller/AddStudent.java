@@ -1,10 +1,9 @@
-package com.example.sportbox.controllers;
+package com.example.sportbox.controller;
 
-import com.example.sportbox.db.DatabaseHandler;
-import com.example.sportbox.db.GroupDao;
-import com.example.sportbox.db.StudentDao;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.Sex;
+import com.example.sportbox.service.GroupService;
+import com.example.sportbox.service.StudentService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,8 +42,8 @@ public class AddStudent {
     @FXML
     private TextField phoneTextField;
 
-    GroupDao groupDao = new GroupDao();
-    StudentDao studentDao = new StudentDao();
+    StudentService studentService;
+    GroupService groupService;
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         Parent studentParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_students.fxml"));
@@ -63,10 +62,10 @@ public class AddStudent {
         student.setName(nameTextField.getText());
         student.setPatronymic(patronymicTextField.getText());
         student.setSex(Sex.getSexByLabel(sexTextField.getText()));
-        student.setGroup(groupDao.getGroupByName(groupTextField.getText()));
+        student.setGroup(groupService.findGroupByName(groupTextField.getText()));
         student.setPhone(Long.parseLong(phoneTextField.getText()));
 
-        studentDao.createStudent(student);
+        studentService.saveStudent(student);
 
         Parent studentParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_students.fxml"));
         Scene studentScene = new Scene(studentParent);

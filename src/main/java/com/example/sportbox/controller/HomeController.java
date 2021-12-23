@@ -1,4 +1,4 @@
-package com.example.sportbox.controllers;
+package com.example.sportbox.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

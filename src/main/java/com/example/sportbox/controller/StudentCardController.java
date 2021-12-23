@@ -1,11 +1,9 @@
-package com.example.sportbox.controllers;
+package com.example.sportbox.controller;
 
-import com.example.sportbox.db.DatabaseHandler;
-import com.example.sportbox.db.GroupDao;
-import com.example.sportbox.db.StudentDao;
-import com.example.sportbox.model.Group;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.model.enums.Sex;
+import com.example.sportbox.service.GroupService;
+import com.example.sportbox.service.StudentService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +17,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class StudentCardController {
-
-//    private int id;
 
     @FXML
     private Button backButton;
@@ -49,14 +45,13 @@ public class StudentCardController {
     @FXML
     private TextField phoneTextField;
 
-    StudentDao studentDao = new StudentDao();
-    GroupDao groupDao = new GroupDao();
+    StudentService studentService;
+    GroupService groupService;
+    Student student;
 
     @FXML
     public void initialize(Student student) {
-
-//        id = student.getStudentId();
-
+        this.student = student;
         lastnameTextField.setText(student.getLastname());
         nameTextField.setText(student.getName());
         patronymicTextField.setText(student.getPatronymic());
@@ -91,27 +86,15 @@ public class StudentCardController {
     }
 
     public void saveButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        DatabaseHandler dbHandler = new DatabaseHandler();
+        student.setLastname(lastnameTextField.getText());
+        student.setName(nameTextField.getText());
+        student.setPatronymic(patronymicTextField.getText());
+        student.setSex(Sex.getSexByLabel(sexTextField.getText()));
+        student.setGroup(groupService.findGroupByName(groupTextField.getText()));
+        student.setPhone(Long.parseLong(phoneTextField.getText()));
 
-        Student updatedStudent = new Student();
-
-        String lastname = lastnameTextField.getText();
-        String name = nameTextField.getText();
-        String patronymic = patronymicTextField.getText();
-        Sex sex = Sex.getSexByLabel(sexTextField.getText());
-        Group group = groupDao.getGroupByName(groupTextField.getText());
-        Long phone = Long.parseLong(phoneTextField.getText());
-
-//        updatedStudent.setStudentId(id);
-        updatedStudent.setLastname(lastname);
-        updatedStudent.setName(name);
-        updatedStudent.setPatronymic(patronymic);
-        updatedStudent.setSex(sex);
-        updatedStudent.setGroup(group);
-        updatedStudent.setPhone(phone);
-
-        studentDao.updateStudent(updatedStudent);
-        initialize(updatedStudent);
+        studentService.updateStudent(student);
+        initialize(student);
 
         changeButton.setDisable(false);
         saveButton.setDisable(true);
