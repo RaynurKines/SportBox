@@ -37,13 +37,17 @@ public class GroupDao {
     public void save(Group group){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(group);
+        session.save(group);
         tx1.commit();
         session.close();
     }
 
     public List<Group> findAll(){
-        List<Group> groups = (List<Group>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Group").list();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<Group> groups = session.createQuery("From Group").list();
+        tx1.commit();
+        session.close();
         return groups;
     }
 

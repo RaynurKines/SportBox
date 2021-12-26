@@ -34,8 +34,4 @@ public class EventService {
     public List<Event> findAllEvents() {
         return eventDao.findAll();
     }
-
-    public List<Competition> findCompetitions() {
-        return eventDao.findCompetitionsByEventId();
-    }
 }

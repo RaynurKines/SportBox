@@ -141,4 +141,54 @@ public class ListOfStudentsController {
         stage.setScene(homeScene);
         stage.show();
     }
+
+    public void showEventsMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_events.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void showStudentsMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_students.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void showGroupsMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_groups.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void createEventMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("add_event.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void createStudentMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("add_student.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
 }

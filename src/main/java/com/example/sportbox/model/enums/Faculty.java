@@ -1,5 +1,8 @@
 package com.example.sportbox.model.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Faculty {
     ADM("АДМ"),
     AT("АТ"),
@@ -20,10 +23,12 @@ public enum Faculty {
     }
 
     public static Faculty getFacultyByLabel(String label){
-        for(Faculty f : Faculty.values()){
-            if(label == f.getLabel())
-                return f;
+        return map.get(label);
+    }
+    private static Map<String, Faculty> map = new HashMap<>();
+    static {
+        for (Faculty faculty : Faculty.values()){
+            map.put(faculty.label, faculty);
         }
-        return null;
     }
 }

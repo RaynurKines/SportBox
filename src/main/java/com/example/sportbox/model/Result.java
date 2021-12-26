@@ -11,17 +11,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "results")
 public class Result {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long resultId;
-
-    @ManyToOne
-    private Student student;
     private Place place;
 
     @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "competition_id", nullable = false)
     private Competition competition;
 
 }

@@ -10,11 +10,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "students")
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long studentId;
+    private long id;
     private String name;
     private String lastname;
     private String patronymic;
@@ -22,11 +23,12 @@ public class Student {
     @Enumerated
     private Sex sex;
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 
     @Singular
-    @OneToMany
+    @OneToMany(mappedBy = "student")
     private List<Result> results;
 
     @NonNull

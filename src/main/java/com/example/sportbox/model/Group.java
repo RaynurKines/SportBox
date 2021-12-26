@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "groups")
 public class Group {
 
     @Id
@@ -24,7 +25,7 @@ public class Group {
     private Faculty faculty;
     private Date dateStart;
 
-    @OneToMany
+    @OneToMany(mappedBy = "group")
     private List<Student> students;
 
 }

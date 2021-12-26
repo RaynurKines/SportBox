@@ -33,13 +33,26 @@ public class CompetitionDao {
     public void save(Competition competition){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(competition);
+        session.save(competition);
         tx1.commit();
         session.close();
     }
 
     public List<Competition> findAll(){
-        List<Competition> competitions = (List<Competition>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Competition").list();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<Competition> competitions = session.createQuery("From Competition").list();
+        tx1.commit();
+        session.close();
+        return competitions;
+    }
+
+    public List<Competition> findCompetitionsByEventId(Event event) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<Competition> competitions = session.createSQLQuery("SELECT name FROM Competitions WHERE event_id = " + event.getEventId()).list();
+        tx1.commit();
+        session.close();
         return competitions;
     }
 }

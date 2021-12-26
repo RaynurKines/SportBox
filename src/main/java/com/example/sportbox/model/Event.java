@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "events")
 public class Event {
 
     @Id
@@ -24,7 +25,7 @@ public class Event {
     private KindOfSport kindOfSport;
 
     @Singular
-    @OneToMany
+    @OneToMany(mappedBy = "event")
     private List<Competition> competitions;
 
     @Enumerated

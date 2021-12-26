@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "competitions")
 public class Competition {
 
     @Id
@@ -20,8 +21,9 @@ public class Competition {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @OneToMany
+    @OneToMany(mappedBy = "competition")
     private List<Result> results;
 }

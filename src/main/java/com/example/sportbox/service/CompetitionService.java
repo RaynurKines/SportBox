@@ -32,4 +32,8 @@ public class CompetitionService {
     public List<Competition> findAllCompetitions() {
         return competitionDao.findAll();
     }
+
+    public List<Competition> findCompetitionsByEventId(Event event) {
+        return competitionDao.findCompetitionsByEventId(event);
+    }
 }

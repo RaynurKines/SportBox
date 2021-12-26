@@ -1,5 +1,6 @@
 package com.example.sportbox.dao;
 
+import com.example.sportbox.model.Group;
 import com.example.sportbox.model.Result;
 import com.example.sportbox.model.Student;
 import com.example.sportbox.utils.HibernateUtil;
@@ -33,13 +34,17 @@ public class StudentDao {
     public void save(Student student){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(student);
+        session.save(student);
         tx1.commit();
         session.close();
     }
 
     public List<Student> findAll(){
-        List<Student> students = (List<Student>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Student").list();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<Student> students = session.createQuery("From Student").list();
+        tx1.commit();
+        session.close();
         return students;
     }
 

@@ -32,22 +32,17 @@ public class EventDao {
     public void save(Event event){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(event);
+        session.save(event);
         tx1.commit();
         session.close();
     }
 
     public List<Event> findAll(){
-        List<Event> events = (List<Event>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Event").list();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<Event> events = session.createQuery("From Event").list();
+        tx1.commit();
+        session.close();
         return events;
-    }
-
-    public Competition findCompetitionById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Competition.class, id);
-    }
-
-    public List<Competition> findCompetitionsByEventId() {
-        List<Competition> competitions = (List<Competition>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Competitions").list();
-        return competitions;
     }
 }

@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 
-public class EventController {
+public class ListOfEventsController {
 
     private ObservableList<Event> eventsData = FXCollections.observableArrayList();
 
@@ -42,22 +42,22 @@ public class EventController {
     @FXML
     private TableColumn<Event, String> levelColumn;
 
-    EventService eventService;
+    EventService eventService = new EventService();
 
     @FXML
     private void initialize() throws SQLException, ClassNotFoundException {
         initData();
 
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Event, Date>("date"));
-        kindOfSportColumn.setCellValueFactory(cellData -> new SimpleStringProperty((String) cellData.getValue().getKindOfSport().getLabel()));
-        levelColumn.setCellValueFactory(cellData -> new SimpleStringProperty((String) cellData.getValue().getCompetitionLevel().getLabel()));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        kindOfSportColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKindOfSport().getLabel()));
+        levelColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCompetitionLevel().getLabel()));
 
         tableEvents.setItems(eventsData);
     }
 
 
-    private void initData() throws SQLException, ClassNotFoundException {
+    private void initData() {
         eventsData.addAll(eventService.findAllEvents());
     }
 
@@ -134,5 +134,54 @@ public class EventController {
         stage.show();
     }
 
+    public void showEventsMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_events.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void showStudentsMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_students.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void showGroupsMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("list_of_groups.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void createEventMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("add_event.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
+
+    public void createStudentMenuAction(ActionEvent actionEvent) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("add_student.fxml"));
+        Scene homeScene = new Scene(homeParent);
+        Stage thisStage = (Stage) backButton.getScene().getWindow();
+        thisStage.hide();
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.show();
+    }
 
 }

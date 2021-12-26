@@ -26,6 +26,7 @@ public class HibernateUtil {
 
             } catch (Exception e) {
                 System.out.println("Исключение!" + e);
+                throw new RuntimeException(e);
             }
         }
         return sessionFactory;

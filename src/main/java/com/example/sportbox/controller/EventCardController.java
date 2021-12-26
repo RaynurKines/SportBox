@@ -28,8 +28,6 @@ public class EventCardController {
 
     private ObservableList<Competition> competitionsData = FXCollections.observableArrayList();
 
-//    private int id;
-
     @FXML
     private TableView<Competition> tableCompetitions;
 
@@ -63,23 +61,31 @@ public class EventCardController {
     @FXML
     private TextField levelTextField;
 
-    EventService eventService;
-    CompetitionService competitionService;
+    @FXML
+    private TextField addCompetitionTextField;
+
+    EventService eventService = new EventService();
+    CompetitionService competitionService = new CompetitionService();
     Event event;
 
     @FXML
-    public void initialize(Event event) throws SQLException, ClassNotFoundException {
+    public void initialize(Event event) {
         this.event = event;
+        initData();
 
         nameTextField.setText(event.getName());
         datePicker.setValue(event.getDate().toLocalDate());
         kindOfSportTextField.setText(event.getKindOfSport().getLabel());
         levelTextField.setText(event.getCompetitionLevel().getLabel());
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("name"));
+        try {
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    private void initData() throws SQLException, ClassNotFoundException {
-        competitionsData.addAll(eventService.findCompetitions());
+    private void initData() {
+        competitionsData.addAll(competitionService.findCompetitionsByEventId(event));
     }
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -102,16 +108,23 @@ public class EventCardController {
         kindOfSportTextField.setEditable(true);
         levelTextField.setEditable(true);
 
+        nameColumn.setEditable(true);
+
         nameTextField.requestFocus();
     }
 
-    public void saveButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void saveButtonAction(ActionEvent actionEvent) {
         Date sqlDate = new java.sql.Date(java.util.Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
 
         event.setName(nameTextField.getText());
         event.setDate(sqlDate);
         event.setKindOfSport(KindOfSport.getKindOfSportByLabel(kindOfSportTextField.getText()));
         event.setCompetitionLevel(CompetitionLevel.getCompetitionLevelByLabel(levelTextField.getText()));
+
+        for (Competition c : tableCompetitions.getItems()) {
+            c.setName(nameColumn.getText());
+            competitionService.updateCompetition(c);
+        }
 
         eventService.updateEvent(event);
         initialize(event);
@@ -124,30 +137,18 @@ public class EventCardController {
         datePicker.setEditable(false);
         kindOfSportTextField.setEditable(false);
         levelTextField.setEditable(false);
-
-        createCompetitionsButtonAction(new ActionEvent());
     }
 
-    //убрать в add
-    public void createCompetitionsButtonAction(ActionEvent actionEvent) {
-        tableCompetitions.setEditable(true);
-        createCompetitionsButton.setDisable(true);
-        saveCompetitionsButton.setVisible(true);
-        saveCompetitionsButton.setDisable(false);
-    }
+    public void addCompetitionButtonAction(ActionEvent actionEvent) {
+        Competition competition = new Competition();
+        competition.setEvent(event);
+        competition.setName(addCompetitionTextField.getText());
 
-    public void saveCompetitionsButtonAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        tableCompetitions.setEditable(false);
-        List<Competition> list = tableCompetitions.getItems();
-        List<String> names = new ArrayList<>();
-        for (Competition comp : list) {
-            names.add(comp.getName());
+        competitionService.saveCompetition(competition);
+
+        if(tableCompetitions.getItems().size() > 1) {
+            tableCompetitions.getItems().clear();
+            initialize(event);
         }
-//        competitionDao.writeCompetitionsInDb(names, id);
-
-        tableCompetitions.setEditable(false);
-        createCompetitionsButton.setDisable(false);
-        saveCompetitionsButton.setVisible(false);
-        saveCompetitionsButton.setDisable(true);
     }
 }
